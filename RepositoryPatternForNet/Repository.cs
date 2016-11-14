@@ -42,9 +42,10 @@ namespace RepositoryPatternForNet
         {
             IQueryable<TEntity> query = dbSet;
 
-            foreach (string includeProperty in includeProperties)
-                if (!String.IsNullOrEmpty(includeProperty))
-                    query = query.Include(includeProperty);
+            if (includeProperties != null && includeProperties.Length > 0)
+                foreach (string includeProperty in includeProperties)
+                    if (!string.IsNullOrEmpty(includeProperty))
+                        query = query.Include(includeProperty);
 
             if (filter != null)
                 query = query.Where(filter);
